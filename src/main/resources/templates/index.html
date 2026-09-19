@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ヘルプデスク問い合わせ管理</title>
+    <style>
+        /* 少しだけCSSをあてて見やすくします */
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        .status { padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>問い合わせ一覧ダッシュボード</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>件名</th>
+                <th>ステータス</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="inq : ${inquiries}">
+                <td th:text="${inq.id}">1</td>
+                <td th:text="${inq.title}">件名サンプル</td>
+                <td>
+                   <select name="status">
+        <!-- th:selected を使って、現在のステータスと一致するものを初期選択にします -->
+        <option value="未対応" th:selected="${inq.status == '未対応'}">未対応</option>
+        <option value="対応中" th:selected="${inq.status == '対応中'}">対応中</option>
+        <option value="完了" th:selected="${inq.status == '完了'}">完了</option>
+    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
